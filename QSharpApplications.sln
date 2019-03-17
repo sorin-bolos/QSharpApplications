@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deutsch", "Deutsch\Deutsch.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeutschJozsa", "DeutschJozsa\DeutschJozsa.csproj", "{B1DEEC84-5283-4642-BC91-18F4D02F7555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperdenseCoding", "SuperdenseCoding\SuperdenseCoding.csproj", "{1F41D231-847F-4B27-99DE-C0BB7D11EB10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperdenseCoding", "SuperdenseCoding\SuperdenseCoding.csproj", "{1F41D231-847F-4B27-99DE-C0BB7D11EB10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumFourier3Bits", "QuantumFourier3Bits\QuantumFourier3Bits.csproj", "{DEAE5BF0-930F-449F-872A-E22E67FB7E09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1F41D231-847F-4B27-99DE-C0BB7D11EB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F41D231-847F-4B27-99DE-C0BB7D11EB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F41D231-847F-4B27-99DE-C0BB7D11EB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEAE5BF0-930F-449F-872A-E22E67FB7E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEAE5BF0-930F-449F-872A-E22E67FB7E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEAE5BF0-930F-449F-872A-E22E67FB7E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEAE5BF0-930F-449F-872A-E22E67FB7E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
