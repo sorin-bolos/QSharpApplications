@@ -43,29 +43,38 @@
 	}
 
     operation Fourier1Bit (q0: Qubit) : Unit {
-        H(q0);
+        body (...) {
+			H(q0);
+		}
+		adjoint auto;
     }
 
 	operation Fourier2Bit (q0: Qubit, q1: Qubit) : Unit {
-        H(q0);
-		Controlled S([q1], q0);
+		body (...) {
+			H(q0);
+			Controlled S([q1], q0);
 
-		H(q1);
+			H(q1);
 
-		SWAP(q0, q1);
+			SWAP(q0, q1);
+		}
+		adjoint auto;
     }
 
 	operation Fourier3Bit (q0: Qubit, q1: Qubit, q2: Qubit) : Unit {
-        H(q0);
-		Controlled S([q1], q0);
-		Controlled T([q2], q0);
+		body (...) {
+			H(q0);
+			Controlled S([q1], q0);
+			Controlled T([q2], q0);
 
-		H(q1);
-		Controlled S([q2], q1);
+			H(q1);
+			Controlled S([q2], q1);
 
-		H(q2);
+			H(q2);
 
-		SWAP(q0, q2);
+			SWAP(q0, q2);
+		}
+		adjoint auto;
     }
 
 	operation Set(desired: Result, q1: Qubit) : Unit
