@@ -20,7 +20,7 @@ namespace Quantum.PhaseEstimation
                 var results = PerformTests(uValues);
                 foreach (var key in results.Keys)
                 {
-                    Console.WriteLine($"Phase estimation returned {key} - {results[key]}%");
+                    Console.WriteLine($"Phase estimation returned 0.{key} - {results[key]}%");
                 }
             }
 
