@@ -28,7 +28,7 @@
 			GroverIteration(qubits);
 			GroverIteration(qubits);
 			GroverIteration(qubits);
-			//GroverIteration(qubits);
+			GroverIteration(qubits);
 			//GroverIteration(qubits);
 			//GroverIteration(qubits);
 			//GroverIteration(qubits);
@@ -101,8 +101,8 @@
 			         [qubits[8], qubits[9], qubits[10], qubits[11]],
 					 qubits[14]);
 
-		H(qubits[0]);
-		H(qubits[1]);
+		//H(qubits[0]);
+		//H(qubits[1]);
 		H(qubits[2]);
 		H(qubits[3]);
 		H(qubits[4]);
@@ -112,8 +112,8 @@
 
 		PhaseShift([qubits[0], qubits[1], qubits[2], qubits[3], qubits[4], qubits[5], qubits[6], qubits[7]]);
 
-		H(qubits[0]);
-		H(qubits[1]);
+		//H(qubits[0]);
+		//H(qubits[1]);
 		H(qubits[2]);
 		H(qubits[3]);
 		H(qubits[4]);
@@ -123,20 +123,20 @@
 	}
 
 	operation GroverOracle(qubits: Qubit[], ancilas: Qubit[], target: Qubit): Unit {
-		PartialGroverOracle([qubits[0], qubits[1]], ancilas);
+		//PartialGroverOracle([qubits[0], qubits[1]], ancilas);
 		PartialGroverOracle([qubits[2], qubits[3]], ancilas);
 		PartialGroverOracle([qubits[4], qubits[5]], ancilas);
 		PartialGroverOracle([qubits[6], qubits[7]], ancilas);
 
-		Controlled X([ancilas[0], ancilas[1], ancilas[2], ancilas[3]], target);
+		Controlled X([ancilas[1], ancilas[2], ancilas[3]], target);
 	}
 
 	operation PartialGroverOracle(qubits: Qubit[], ancilas: Qubit[]): Unit {
-		X(qubits[0]);
-		X(qubits[1]);
-		Controlled X([qubits[0], qubits[1]], ancilas[0]);
-		X(qubits[0]);
-		X(qubits[1]);
+		//X(qubits[0]);
+		//X(qubits[1]);
+		//Controlled X([qubits[0], qubits[1]], ancilas[0]);
+		//X(qubits[0]);
+		//X(qubits[1]);
 
 		X(qubits[0]);
 		Controlled X([qubits[0], qubits[1]], ancilas[1]);
@@ -152,8 +152,8 @@
 	}
 
 	operation PhaseShift(qubits: Qubit[]) : Unit {
-		X(qubits[0]);
-		X(qubits[1]);
+		//X(qubits[0]);
+		//X(qubits[1]);
 		X(qubits[2]);
 		X(qubits[3]);
 		X(qubits[4]);
@@ -161,10 +161,10 @@
 		X(qubits[6]);
 		X(qubits[7]);
 
-		Controlled Z([qubits[0], qubits[1], qubits[2], qubits[3], qubits[4], qubits[5], qubits[6]], qubits[7]);
+		Controlled Z([qubits[2], qubits[3], qubits[4], qubits[5], qubits[6]], qubits[7]);
 
-		X(qubits[0]);
-		X(qubits[1]);
+		//X(qubits[0]);
+		//X(qubits[1]);
 		X(qubits[2]);
 		X(qubits[3]);
 		X(qubits[4]);
