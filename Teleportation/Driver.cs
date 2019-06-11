@@ -17,7 +17,7 @@ namespace Quantum.Teleportation
                 var zeroProbabilities = new List<double>();
                 for (int i = 0; i < numberOfTests; i++)
                 {
-                    var (zeroProbability, oneProbability) = TeleportResult.Run(qsim, Result.Zero).Result;
+                    var (zeroProbability, oneProbability) = TeleportSuperposition.Run(qsim).Result;
                     zeroProbabilities.Add(zeroProbability);
                     oneProbabilities.Add(oneProbability);
 
