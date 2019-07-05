@@ -21,8 +21,8 @@ namespace Quantum.TravellingSalesman
                     var bits = HelloQ.Run(qsim).Result.Cast<int>().ToArray();
                     var result = ToBase10Nodes(bits.Take(8).ToArray());
 
-                    AddResult(string.Join("", result));// + "_" +
-                              //string.Join("", bits.Skip(8).ToArray()));
+                    AddResult(string.Join("", result) + "_" +
+                              string.Join("", bits.Skip(8).ToArray()));
                     //Console.WriteLine(string.Join("", result));
                 }
             }

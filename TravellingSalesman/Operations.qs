@@ -4,8 +4,8 @@
     open Microsoft.Quantum.Canon;
     
     operation HelloQ () : Result[] {
-		mutable result = new Result[15];
-        using (qubits = Qubit[15])
+		mutable result = new Result[16];
+        using (qubits = Qubit[16])
         {			
 			//X(qubits[0]);
 			//X(qubits[1]);
@@ -15,30 +15,14 @@
 			//GroverOracle([qubits[0], qubits[1], qubits[2], qubits[3], qubits[4], qubits[5], qubits[6], qubits[7]],
 			//             [qubits[8], qubits[9], qubits[10], qubits[11]], qubits[14]);
 
-			X(qubits[14]);
-		    H(qubits[14]);
+			//X(qubits[14]);
+		    //H(qubits[14]);
 			//
 			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-
-			AmplitudeAmplification(qubits);
-			//X(qubits[14]);
-		    //H(qubits[14]);
-			AmplitudeAmplification(qubits);
-			//X(qubits[14]);
-		    //H(qubits[14]);
-			//AmplitudeAmplification(qubits);
-			//X(qubits[14]);
-		    //H(qubits[14]);
+			//
 			//AmplitudeAmplification(qubits);
 
-			for (i in 0..14)
+			for (i in 0..15)
 			{
 				set result w/= i <- M(qubits[i]);
 			}
@@ -50,48 +34,136 @@
 
 	operation WalkGraph(qubits: Qubit[]) : Unit {
 		body (...) {
-			//Step([qubits[0], qubits[1]], [qubits[2], qubits[3]]);
-			//Step([qubits[2], qubits[3]], [qubits[4], qubits[5]]);
-			//Step([qubits[4], qubits[5]], [qubits[6], qubits[7]]);
+			let counters = [qubits[8], qubits[9], qubits[10], qubits[11], qubits[12], qubits[13], qubits[14], qubits[15]];
 
-			AllConnectionsStep([qubits[0], qubits[1]], [qubits[2], qubits[3]]);
-			AllConnectionsStep([qubits[2], qubits[3]], [qubits[4], qubits[5]]);
-			AllConnectionsStep([qubits[4], qubits[5]], [qubits[6], qubits[7]]);
+			//Step(counters, [qubits[0], qubits[1]], [qubits[2], qubits[3]]);
+			//Increment([qubits[0], qubits[1]], counters);
+
+			//Step(counters, [qubits[2], qubits[3]], [qubits[4], qubits[5]]);
+			//Increment([qubits[2], qubits[3]], counters);
+
+			//Step(counters, [qubits[4], qubits[5]], [qubits[6], qubits[7]]);
+			//Increment([qubits[4], qubits[5]], counters);
+
+			AllConnectionsStep(counters, [qubits[0], qubits[1]], [qubits[2], qubits[3]]);
+			Increment([qubits[0], qubits[1]], counters);
+			AllConnectionsStep(counters, [qubits[2], qubits[3]], [qubits[4], qubits[5]]);
+			Increment([qubits[2], qubits[3]], counters);
+			AllConnectionsStep(counters, [qubits[4], qubits[5]], [qubits[6], qubits[7]]);
+			Increment([qubits[4], qubits[5]], counters);
 		}
 
 		adjoint auto;
 	}
 
-	operation Step(originalState: Qubit[], nextState: Qubit[]) : Unit {
+	operation Step(counters: Qubit[], originalState: Qubit[], nextState: Qubit[]) : Unit {
 		body(...) {
+			X(counters[0]);
+			X(counters[1]);
 			X(originalState[0]);
 			X(originalState[1]);
-			Controlled GoTo0And1And3([originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			Controlled GoTo0And1And3([counters[0], counters[1], originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			X(counters[0]);
+			X(counters[1]);
 			X(originalState[0]);
 			X(originalState[1]);
 
+			X(counters[2]);
+			X(counters[3]);
 			X(originalState[0]);
 			//Controlled X([originalState[0], originalState[1]], nextState[1]);
-			Controlled GoTo1And2([originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			Controlled GoTo1And2([counters[2], counters[3], originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			X(counters[2]);
+			X(counters[3]);
 			X(originalState[0]);
 
+			X(counters[4]);
+			X(counters[5]);
 			X(originalState[1]);
 			//Controlled X([originalState[0], originalState[1]], nextState[0]);
-			Controlled GoTo2And3([originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			Controlled GoTo2And3([counters[4], counters[5], originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			X(counters[4]);
+			X(counters[5]);
 			X(originalState[1]);
 
+			X(counters[6]);
+			X(counters[7]);
 			//Controlled X([originalState[0], originalState[1]], nextState[0]);
 			//Controlled X([originalState[0], originalState[1]], nextState[1]);
-			Controlled GoTo0And1And3([originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			Controlled GoTo0And1And3([counters[6], counters[7], originalState[0], originalState[1]], (nextState[0], nextState[1]));
+			X(counters[6]);
+			X(counters[7]);
 		}
 
 		adjoint auto;
 	}
 
-	operation AllConnectionsStep(originalState: Qubit[], nextState: Qubit[]) : Unit {
+	operation Increment(stepQubits: Qubit[], counters: Qubit[]) : Unit {
 		body (...) {
-			H(nextState[0]);
-			H(nextState[1]);
+			X(stepQubits[0]);
+			X(stepQubits[1]);
+			Controlled X([stepQubits[0], stepQubits[1], counters[1]], counters[0]);
+			Controlled X([stepQubits[0], stepQubits[1]], counters[1]);
+			X(stepQubits[0]);
+			X(stepQubits[1]);
+
+			X(stepQubits[0]);
+			Controlled X([stepQubits[0], stepQubits[1], counters[3]], counters[2]);
+			Controlled X([stepQubits[0], stepQubits[1]], counters[3]);
+			X(stepQubits[0]);
+
+			X(stepQubits[1]);
+			Controlled X([stepQubits[0], stepQubits[1], counters[5]], counters[4]);
+			Controlled X([stepQubits[0], stepQubits[1]], counters[5]);
+			X(stepQubits[1]);
+
+			Controlled X([stepQubits[0], stepQubits[1], counters[7]], counters[6]);
+			Controlled X([stepQubits[0], stepQubits[1]], counters[7]);
+		}
+
+		adjoint auto;
+	}
+
+	operation AllConnectionsStep(counters: Qubit[], originalState: Qubit[], nextState: Qubit[]) : Unit {
+		body (...) {
+			//H(nextState[0]);
+			//H(nextState[1]);
+
+			X(counters[0]);
+			X(counters[1]);
+			X(originalState[0]);
+			X(originalState[1]);
+			Controlled H([counters[0], counters[1], originalState[0], originalState[1]], nextState[0]);
+			Controlled H([counters[0], counters[1], originalState[0], originalState[1]], nextState[1]);
+			X(counters[0]);
+			X(counters[1]);
+			X(originalState[0]);
+			X(originalState[1]);
+
+			X(counters[2]);
+			X(counters[3]);
+			X(originalState[0]);
+			Controlled H([counters[2], counters[3], originalState[0], originalState[1]], nextState[0]);
+			Controlled H([counters[2], counters[3], originalState[0], originalState[1]], nextState[1]);
+			X(counters[2]);
+			X(counters[3]);
+			X(originalState[0]);
+
+			X(counters[4]);
+			X(counters[5]);
+			X(originalState[1]);
+			Controlled H([counters[4], counters[5], originalState[0], originalState[1]], nextState[0]);
+			Controlled H([counters[4], counters[5], originalState[0], originalState[1]], nextState[1]);
+			X(counters[4]);
+			X(counters[5]);
+			X(originalState[1]);
+
+			X(counters[6]);
+			X(counters[7]);
+			Controlled H([counters[6], counters[7], originalState[0], originalState[1]], nextState[0]);
+			Controlled H([counters[6], counters[7], originalState[0], originalState[1]], nextState[1]);
+			X(counters[6]);
+			X(counters[7]);
 		}
 
 		adjoint auto;
