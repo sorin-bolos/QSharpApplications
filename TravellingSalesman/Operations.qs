@@ -18,21 +18,6 @@
 			AllConnectionsStep([qubits[2], qubits[3]], [qubits[4], qubits[5]]);
 			AllConnectionsStep([qubits[4], qubits[5]], [qubits[6], qubits[7]]);
 
-			//GroverOracle([qubits[0], qubits[1], qubits[2], qubits[3], qubits[4], qubits[5], qubits[6], qubits[7]],
-			//             [qubits[8], qubits[9], qubits[10], qubits[11]], qubits[14]);
-
-			X(qubits[14]);
-		    H(qubits[14]);
-			
-			GroverIteration(qubits);
-			GroverIteration(qubits);
-			GroverIteration(qubits);
-			GroverIteration(qubits);
-			GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-			//GroverIteration(qubits);
-
 			for (i in 0..14)
 			{
 				set result w/= i <- M(qubits[i]);
